@@ -1,6 +1,13 @@
+#!/usr/bin/env python3
+# -*- encoding: utf-8 -*-
+
 import cv2
 import threading
 import numpy as np
+
+import rospy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
 
 # gstreamer_pipeline returns a GStreamer pipeline for capturing from the CSI camera
 # Flip the image by setting the flip_method (most common values: 0 and 2)
