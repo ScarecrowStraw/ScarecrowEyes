@@ -11,13 +11,6 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 
-
-# Define project name
-
-project(opencv_example_project)
-
-
-
 # Find OpenCV, you may need to set OpenCV_DIR variable
 
 # to the absolute path to the directory containing OpenCVConfig.cmake file
@@ -27,8 +20,6 @@ project(opencv_example_project)
 set(OpenCV_DIR /usr/local/opencv4/lib/cmake/opencv4)
 
 find_package(OpenCV REQUIRED)
-
-
 
 # If the package has been found, several variables will
 
@@ -48,13 +39,9 @@ message(STATUS "    libraries: ${OpenCV_LIBS}")
 
 message(STATUS "    include path: ${OpenCV_INCLUDE_DIRS}")
 
-
-
 # Declare the executable target built from your sources
 
 add_executable(stereo_calibration stereo_calibration.cpp)
-
-
 
 # Link your application with OpenCV libraries
 

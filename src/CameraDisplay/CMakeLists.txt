@@ -8,10 +8,6 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-# Define project name
-
-project(opencv_example_project)
-
 # Find OpenCV, you may need to set OpenCV_DIR variable
 
 # to the absolute path to the directory containing OpenCVConfig.cmake file
