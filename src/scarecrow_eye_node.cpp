@@ -45,8 +45,8 @@ void openCameraStream(std::string path, std::string dirName, std::string title)
     if(frame.empty()){std::cerr << "frame buffer empty " << std::endl;}
     frameCount++;
 
-    std::thread th(writeFrametoDisk, &frame, outputDir, frameCount, windowName);
-    th.join();
+//    std::thread th(writeFrametoDisk, &frame, outputDir, frameCount, windowName);
+//    th.join();
     //// a simple wayto exit the loop
     if(frameCount > 500)
     {
