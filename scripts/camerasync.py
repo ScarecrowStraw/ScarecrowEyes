@@ -160,19 +160,25 @@ def start_cameras():
         print("Unable to open any cameras")
         # TODO: Proper Cleanup
         SystemExit(0)
+    rospy.init_node('stereo_node', anonymous=True)
+    bridge = CvBridge()
+    image_pub = rospy.Publisher("stereo", Image)
 
     while cv2.getWindowProperty("CSI Cameras", 0) >= 0 :
         
         _ , left_image=left_camera.read()
         _ , right_image=right_camera.read()
         camera_images = np.hstack((left_image, right_image))
+
         cv2.imshow("CSI Cameras", camera_images)
+        image_pub.publish(bridge.cv2_to_ígmsg(camera_images, "bgr8"))
 
         # This also acts as
         keyCode = cv2.waitKey(30) & 0xFF
         # Stop the program on the ESC key
         if keyCode == 27:
             break
+    rospy.spin()
 
     left_camera.stop()
     left_camera.release()
