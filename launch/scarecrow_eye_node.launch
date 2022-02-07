@@ -1,0 +1,4 @@
+<launch>
+    <node name="stereo_imu_node" pkg="scarecrow_eye" type="scarecrow_eye_node" output="screen" />
+    <node name="stereo_camera_node" pkg="scarecrow_eye" type="camerasync.py" output="screen" />
+</launch>

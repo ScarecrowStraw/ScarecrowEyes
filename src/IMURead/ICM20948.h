@@ -22,7 +22,7 @@
 #include <stddef.h>
 #include <math.h>
 
-typedef uint8_t bool;
+// typedef uint8_t bool;
 #define true  1
 #define false 0
 

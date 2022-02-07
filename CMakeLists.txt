@@ -16,6 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
 )
 
+# add_definitions(-std=c99)
+
 find_package( OpenCV REQUIRED)
 find_package( Boost REQUIRED )
 
@@ -38,10 +40,13 @@ catkin_install_python(PROGRAMS
       scripts/camerasync.py
       DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
+add_subdirectory(src/IMURead)
+
 add_executable(${PROJECT_NAME}_node src/scarecrow_eye_node.cpp)
 
 target_link_libraries(${PROJECT_NAME}_node
   ${OpenCV_LIBS}
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
+  icm20948
 )

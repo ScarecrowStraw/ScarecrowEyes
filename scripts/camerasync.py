@@ -170,8 +170,8 @@ def start_cameras():
         _ , right_image=right_camera.read()
         camera_images = np.hstack((left_image, right_image))
 
-        cv2.imshow("CSI Cameras", camera_images)
-        image_pub.publish(bridge.cv2_to_ígmsg(camera_images, "bgr8"))
+        # cv2.imshow("CSI Cameras", camera_images)
+        image_pub.publish(bridge.cv2_to_imgmsg(camera_images, "bgr8"))
 
         # This also acts as
         keyCode = cv2.waitKey(30) & 0xFF
