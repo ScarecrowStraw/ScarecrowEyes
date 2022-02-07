@@ -102,7 +102,7 @@ int main(int argc, char * argv[])
 		printf("Motion sersor NULL\n");
 	}
 
-  ros::Rate loop_rate(50);
+  ros::Rate loop_rate(200);
 
 	while(ros::ok())
 	{

@@ -99,7 +99,7 @@ def gstreamer_pipeline(
     capture_height=720,
     display_width=1280,
     display_height=720,
-    framerate=30,
+    framerate=21,
     flip_method=0,
 ):
     return (
@@ -129,7 +129,7 @@ def start_cameras():
     left_camera.open(
         gstreamer_pipeline(
             sensor_id=0,
-            sensor_mode=3,
+            sensor_mode=4,
             flip_method=0,
             display_height=540,
             display_width=960,
@@ -141,7 +141,7 @@ def start_cameras():
     right_camera.open(
         gstreamer_pipeline(
             sensor_id=1,
-            sensor_mode=3,
+            sensor_mode=4,
             flip_method=0,
             display_height=540,
             display_width=960,
@@ -162,16 +162,21 @@ def start_cameras():
         SystemExit(0)
     rospy.init_node('stereo_node', anonymous=True)
     bridge = CvBridge()
-    image_pub = rospy.Publisher("stereo", Image)
+    cam0_pub = rospy.Publisher("cam0_raw", Image)
+    cam1_pub = rospy.Publisher("cam1_raw", Image)
 
     while cv2.getWindowProperty("CSI Cameras", 0) >= 0 :
         
         _ , left_image=left_camera.read()
         _ , right_image=right_camera.read()
+        left_image = np.asarray(left_image)
+        right_image = np.asarray(right_image)
+
         camera_images = np.hstack((left_image, right_image))
 
-        # cv2.imshow("CSI Cameras", camera_images)
-        image_pub.publish(bridge.cv2_to_imgmsg(camera_images, "bgr8"))
+        cv2.imshow("CSI Cameras", camera_images)
+        cam0_pub.publish(bridge.cv2_to_imgmsg(left_image, "bgr8"))
+        cam1_pub.publish(bridge.cv2_to_imgmsg(right_image, "bgr8"))
 
         # This also acts as
         keyCode = cv2.waitKey(30) & 0xFF
