@@ -26,7 +26,7 @@ void *capture(void *threadarg)
     // Safely open video stream
     pthread_mutex_lock(&foo_mutex);
     cap.open(data->path, cv::CAP_GSTREAMER);
-    pthread_mutex_lock(&foo_mutex);
+    pthread_mutex_unlock(&foo_mutex);
 
     if (!cap.isOpened())
     {
@@ -47,7 +47,7 @@ void *capture(void *threadarg)
         cap >> frame;
         std::cout << "Thread " << data->thread_id << std::endl;
         cv::imshow(data->window_title, frame);
-        cv::waitKey(0);
+        cv::waitKey(10);
     }
 
     // Release VideoCapture object
