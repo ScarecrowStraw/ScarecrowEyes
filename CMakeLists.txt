@@ -31,10 +31,10 @@ include_directories(
   ${Boost_INCLUDE_DIR}
 )
 
-add_subdirectory(src/CameraDisplay)
-add_subdirectory(src/CameraSync)
+# add_subdirectory(src/CameraDisplay)
+# add_subdirectory(src/CameraSync)
 # add_subdirectory(src/IMURead)
-add_subdirectory(src/StereoCamerasCalibration)
+# add_subdirectory(src/StereoCamerasCalibration)
 
 catkin_install_python(PROGRAMS 
       scripts/camerasync.py
