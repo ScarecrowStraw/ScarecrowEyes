@@ -66,17 +66,17 @@ void openCameraStream(std::string path, std::string dirName, std::string title)
 
 int main(int argc, char * argv[])
 {
-  // std::string outputDir1 = "left/";
-  // std::string outputDir2 = "right/";
-  // std::string cam0 = "nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM), width=640, height=480, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=640, height=480, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
-  // std::string cam1 = "nvarguscamerasrc sensor-id=1 ! video/x-raw(memory:NVMM), width=640, height=480, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=640, height=480, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
-  // std::string windowTitle0 = "Left";
-  // std::string windowTitle1 = "Right";
+  std::string outputDir1 = "left/";
+  std::string outputDir2 = "right/";
+  std::string cam0 = "nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM), width=640, height=480, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=640, height=480, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
+  std::string cam1 = "nvarguscamerasrc sensor-id=1 ! video/x-raw(memory:NVMM), width=640, height=480, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=640, height=480, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
+  std::string windowTitle0 = "Left";
+  std::string windowTitle1 = "Right";
 
-  // std::thread camera1Thread(openCameraStream, cam0, outputDir1, windowTitle0);
-  // std::thread camera2Thread(openCameraStream, cam1, outputDir2, windowTitle1);
-  // camera1Thread.join();
-  // camera2Thread.join();
+  std::thread camera1Thread(openCameraStream, cam0, outputDir1, windowTitle0);
+  std::thread camera2Thread(openCameraStream, cam1, outputDir2, windowTitle1);
+  camera1Thread.join();
+  camera2Thread.join();
 
   ros::init(argc, argv, "stereo_imu");
   ros::NodeHandle n;

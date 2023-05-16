@@ -5,9 +5,14 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/videoio.hpp>
 
+int i = 0;
+
 void writeFrametoDisk(const cv::Mat *frame, std::string path, int frameNum, std::string windowName)
 {
-  cv::imwrite(path.append(std::to_string(frameNum)).append(".png"), *frame);
+	std::cout << "Saving ... " << i << std::endl;
+	std::string name = path.append(std::to_string(frameNum)).append(".png");
+	std::cout << name << std::endl; 
+  cv::imwrite(name, *frame);
   return;
 }
 
@@ -48,6 +53,7 @@ void openCameraStream(std::string path, std::string dirName, std::string title)
 
     std::thread th(writeFrametoDisk, &frame, outputDir, frameCount, windowName);
     th.join();
+	i++;
     //// a simple wayto exit the loop
     if(frameCount > 500)
     {
@@ -63,8 +69,8 @@ void openCameraStream(std::string path, std::string dirName, std::string title)
 
 int main(int argc, char * argv[])
 {
-  std::string outputDir1 = "left/";
-  std::string outputDir2 = "right/";
+  std::string outputDir1 = "/home/nano/3SBot_ws/left/";
+  std::string outputDir2 = "/home/nano/3SBot_ws/right/";
   std::string cam0 = "nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM), width=640, height=480, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=640, height=480, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
   std::string cam1 = "nvarguscamerasrc sensor-id=1 ! video/x-raw(memory:NVMM), width=640, height=480, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=640, height=480, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
   std::string windowTitle0 = "Left";
