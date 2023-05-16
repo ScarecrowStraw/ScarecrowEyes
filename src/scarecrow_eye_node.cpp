@@ -113,10 +113,6 @@ void openCameraStream(std::string path, std::string dirName, std::string title)
 
 int main(int argc, char * argv[])
 {
-<<<<<<< HEAD
-  std::string outputDir1 = "left/";
-  std::string outputDir2 = "right/";
-=======
   encode_param.push_back(cv::IMWRITE_JPEG_QUALITY) ;
   encode_param.push_back(k_JPEG_COMPRESS);
 
@@ -127,7 +123,6 @@ int main(int argc, char * argv[])
   std::string outputDir2 = "right/";
   std::string metaData1 = "timestamp/";
   std::string metaData2 = "imu/";
->>>>>>> 4566f9f399603cc3ea8cb8995f370491f194011e
   std::string cam0 = "nvarguscamerasrc sensor-id=0 ! video/x-raw(memory:NVMM), width=640, height=480, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=640, height=480, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
   std::string cam1 = "nvarguscamerasrc sensor-id=1 ! video/x-raw(memory:NVMM), width=640, height=480, format=(string)NV12, framerate=(fraction)20/1 ! nvvidconv flip-method=0 ! video/x-raw, width=640, height=480, format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
   std::string windowTitle0 = "Left";
